@@ -2,11 +2,11 @@
 */
 
 CREATE TABLE Organism (
-	OrgID			CHAR(4)		NOT NULL,
-	Taxonomy		CHAR(4)		NOT NULL,
-	CommonName		CHAR(20)	NOT NULL,
+	OrgID		CHAR(4)		NOT NULL,
+	Taxonomy	CHAR(4)		NOT NULL,
+	CommonName	CHAR(20)	NOT NULL,
 	ScientificName	CHAR(20)	NOT NULL,
-	FOREIGN KEY (Taxonomy) REFERENCES Taxonomy (TaxonID),
+	FOREIGN KEY 	(Taxonomy) REFERENCES 	Taxonomy (TaxonID),
 	PRIMARY KEY	(SpeciesID)
 );
 CREATE TABLE Taxonomy (
@@ -15,21 +15,21 @@ CREATE TABLE Taxonomy (
 	TaxonFamily		CHAR(20)	NOT NULL,
 	TaxonOrder		CHAR(20)	NOT NULL,
 	TaxonClass		CHAR(20)	NOT NULL,
-	PRIMARY KEY (TaxonID),
-	UNIQUE KEY (Genus)
+	PRIMARY KEY	(TaxonID),
+	UNIQUE KEY 	(Genus)
 );
 CREATE TABLE Genome (
-	AssemblyID			CHAR(4)		NOT NULL,
+	AssemblyID		CHAR(4)		NOT NULL,
 	GenBankAccession	CHAR(20)	NOT NULL,
-	SpeciesID			CHAR(4)		NOT NULL,
-	ChromCount			INTEGER,
-	GenSize				INTEGER,
-	GC Content			INTEGER,
-	Protein				INTEGER,
-	RNA					INTEGER,
-	Gene				INTEGER,
+	SpeciesID		CHAR(4)		NOT NULL,
+	ChromCount		INTEGER,
+	GenSize			INTEGER,
+	GC Content		INTEGER,
+	Protein			INTEGER,
+	RNA			INTEGER,
+	Gene			INTEGER,
 	FOREIGN KEY	(SpeciesID) REFERENCES	Organism (OrgID),
-	PRIMARY KEY (AssemblyID),
+	PRIMARY KEY	(AssemblyID),
 	UNIQUE KEY	(GenBankAccession)
 );
 CREATE TABLE Chromosomal (
@@ -39,9 +39,9 @@ CREATE TABLE Chromosomal (
 	CrSize		INTEGER,
 	GC Content 	INTEGER,
 	Protein 	INTEGER,
-	RNA			INTEGER,
+	RNA		INTEGER,
 	Gene		INTEGER,
-	FOREIGN KEY	(GenomeID)	REFERENCES	Genome (AssemblyID),
+	FOREIGN KEY	(GenomeID) REFERENCES Genome (AssemblyID),
 	PRIMARY KEY	(ChromoID)
 );
 CREATE TABLE Mitochondrial (
@@ -50,9 +50,9 @@ CREATE TABLE Mitochondrial (
 	MtSize		INTEGER,
 	GC Content 	INTEGER,
 	Protein 	INTEGER,
-	RNA			INTEGER,
+	RNA		INTEGER,
 	Gene		INTEGER,
-	FOREIGN KEY	(GenomeID)	REFERENCES	Genome (AssemblyID),
+	FOREIGN KEY	(GenomeID) REFERENCES	Genome (AssemblyID),
 	PRIMARY KEY	(MtID)
 );
 
