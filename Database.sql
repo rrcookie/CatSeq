@@ -27,13 +27,10 @@ CREATE TABLE Genome (
 	AssemblyLevel		CHAR(20)	NOT NULL,
 	GenSize			INTEGER,
 	ChromCount		INTEGER,
-	GC Content		INTEGER,
-	Protein			INTEGER,
-	RNA			INTEGER,
-	Gene			INTEGER,
 	FOREIGN KEY	(SpeciesID) REFERENCES	Organism (OrgID),
 	PRIMARY KEY	(AssemblyID),
-	UNIQUE KEY	(GenBankAccession)
+	UNIQUE KEY	(GenBankAccession),
+	UNIQUE KEY	(FNAFile)
 );
 
 /*
