@@ -1,3 +1,6 @@
+CREATE DATABASE CatSeqDB;
+USE CatSeqDB;
+
 /* DDL statements below for entity sets: Organism, Taxonomy, Genome,
 (Chromosomal, Mitochondrial commented out until more assemblies have relevent data)
 */
