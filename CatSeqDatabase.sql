@@ -76,7 +76,7 @@ INSERT INTO Organism VALUES
 		('O01', 'T01', 'Domestic cat', 'Felis catus'),
 		('O02', 'T01', 'Black-footed cat', 'Felis nigripes'),
 		('O03', 'T02', 'Canadian lynx', 'Lynx canadensis'),
-		('O04', 'T02', 'Spanish Lynx', 'Lynx pardinus'),
+		('O04', 'T02', 'Spanish lynx', 'Lynx pardinus'),
 		('O05', 'T03', 'Lion', 'Panthera leo'),
 		('O06', 'T03', 'Jaguar', 'Panthera onca'),
 		('O07', 'T03', 'Amur tiger', 'Panthera tigris altaica'),
