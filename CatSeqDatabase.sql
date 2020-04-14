@@ -20,7 +20,7 @@ CREATE TABLE Taxonomy (
 	TaxonOrder		CHAR(20)	NOT NULL,
 	TaxonClass		CHAR(20)	NOT NULL,
 	PRIMARY KEY	(TaxonID),
-	UNIQUE KEY 	(Genus)
+	UNIQUE KEY 	(TaxonGenus)
 );
 CREATE TABLE Genome (
 	AssemblyID		CHAR(4)		NOT NULL,
