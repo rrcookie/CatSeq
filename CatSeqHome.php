@@ -64,36 +64,34 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
         <?php
           $dbhost = 'odin.unomaha.edu';
           $dbuser = 'rrcook';
-          $conn = mysql_connect($dbhost, $dbuser);
+		      $dbpass = 'c00kie.KAT';
+          $conn = mysql_connect($dbhost, $dbuser, $dbpass);
           if (!$conn) {
             die('Could not connect: ' . mysql_error());
           }
-          $dbname = "CatSeqDB";
+          $dbname = "rcook";
           mysql_select_db($dbname);
 
-          $query = "SELECT Genome.GenBankAccession, Organism.CommonName, Organism.ScientificName, FROM Genome INNER JOIN Organism ON Genome.SpeciesID = Organism.OrgID";
-          $result = mysql_query($query);
-          $fields_num = mysql_num_fields($result);
-
-          echo "<h1>Available Genomes</h1>";
-          echo "<table border='1'><tr>";
-
-          for($i=0; $i<$fields_num; $i++)
-           {
-              $field = mysql_fetch_field($result);
-              echo "<td>{$field->name}</td>";
-          }
-          echo "</tr>\n";
-
-          while($row = mysql_fetch_row($result))
-          {
-              echo "<tr>";
-              foreach($row as $cell)
-                  echo "<td>$cell</td>";
-              echo "</tr>\n";
-          }
-          mysql_free_result($result);
-         ?>
+          $query = "SELECT * FROM AvailableGenomes";
+		      $result = mysql_query($query);
+	    	  echo "functional";
+	    	  echo "<table>
+	          	    <tr>
+		                <th>CommonName</th>
+		                <th>ScientificName</th>
+          		      <th>GenBankAccession</th>
+	          	    </tr>";
+          while($row = mysql_fetch_array($result, MYSQL_ASSOC))
+		      {
+			    echo "<tr>
+	                <td>{$row['CommonName']}</td>
+	       	        <td>{$row['ScientificName']}</td>
+                  <td>{$row['GenBankAccession']}</td>
+	    	       </tr>";
+		      }
+	        echo "</table>";
+          mysql_close($conn);
+        ?>
       </p>
     </div>
   </div>
@@ -139,3 +137,4 @@ function w3_close() {
 
 </body>
 </html>
+
