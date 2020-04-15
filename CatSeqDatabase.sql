@@ -1,9 +1,8 @@
-CREATE DATABASE CatSeqDB;
-USE CatSeqDB;
+/*I lost permissions to create new databases when my Uni changed servers. If re-producing, create a new DB to use.*/
+USE rrcook;
 
-/* DDL statements below for entity sets: Organism, Taxonomy, Genome,
-(Chromosomal, Mitochondrial commented out until more assemblies have relevent data)
-*/
+/* Create Tables for entity sets: Organism, Taxonomy, Genome
+(Chromosomal, Mitochondrial commented out until more assemblies have relevent data)*/
 CREATE TABLE Taxonomy (
 	TaxonID	CHAR(4)	NOT NULL,
 	TaxonGenus CHAR(20) NOT NULL,
@@ -63,8 +62,7 @@ CREATE TABLE Mitochondrial (
 );
 */
 
-/*DML for tables Taxonomy, Organism, and Genome
-*/
+/*Populate tables: Taxonomy, Organism, and Genome*/
 INSERT INTO Taxonomy (TaxonID, TaxonGenus) VALUES
 	('T01', 'Felis'),
 	('T02', 'Lynx'),
@@ -91,6 +89,7 @@ INSERT INTO Genome VALUES
 	('A02', 'GCA_007474595.1_mLynCan4_v1.p_genomic.fna', 'GCA_007474595.1', 'O03', 'Chromosome', 2408883772, 19),
 	('A10', 'GCA_000181335.4_Felis_catus_9.0_genomic.fna', 'GCA_000181335.4', 'O01', 'Chromosome', 2521863845, 19),
 	('A14', 'GCA_000003115.1_catChrV17e_genomic.fna', 'GCA_000003115.1', 'O01', 'Chromosome', 3160286939, 19);
+
 INSERT INTO Genome(AssemblyID, FNAFile, GenBankAccession, SpeciesID, AssemblyLevel, GenSize) VALUES
 	('A03', 'GCA_005406085.1_Prionailurus_bengalensis_euptilurus_v01_genomic.fna', 'GCA_005406085.1', 'O11', 'Scaffold', 2435348619),
 	('A04', 'GCA_900661375.1_LYPA1.0_genomic.fna', 'GCA_900661375.1', 'O04', 'Scaffold', 2413208909),
@@ -102,3 +101,9 @@ INSERT INTO Genome(AssemblyID, FNAFile, GenBankAccession, SpeciesID, AssemblyLev
 	('A11', 'GCA_001857705.1_PanPar1.0_genomic.fna', 'GCA_001857705.1', 'O08', 'Scaffold', 2578019207),
 	('A12', 'GCA_001443585.1_aciJub1_genomic.fna', 'GCA_001443585.1', 'O09', 'Scaffold', 2372536860),
 	('A13', 'GCA_000464555.1_PanTig1.0_genomic.fna', 'GCA_000464555.1', 'O07', 'Scaffold', 2391082183);
+
+/*Create view to display genome assemblies available in the database*/
+CREATE VIEW AvailableGenomes AS
+SELECT Organism.CommonName, Organism.ScientificName, Genome.GenBankAccession
+FROM Genome
+INNER JOIN Organism ON Genome.SpeciesID = Organism.OrgID;
