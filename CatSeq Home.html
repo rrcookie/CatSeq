@@ -60,7 +60,41 @@ html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif;}
   <div class="w3-row w3-padding-64">
     <div class="w3-twothird w3-container">
       <h1 class="w3-text-teal">Felid Genome Database</h1>
-      <p>[Insert database view]</p>
+      <p>
+        <?php
+          $dbhost = 'odin.unomaha.edu';
+          $dbuser = 'rrcook';
+          $conn = mysql_connect($dbhost, $dbuser);
+          if (!$conn) {
+            die('Could not connect: ' . mysql_error());
+          }
+          $dbname = "CatSeqDB";
+          mysql_select_db($dbname);
+
+          $query = "SELECT Genome.GenBankAccession, Organism.CommonName, Organism.ScientificName, FROM Genome INNER JOIN Organism ON Genome.SpeciesID = Organism.OrgID";
+          $result = mysql_query($query);
+          $fields_num = mysql_num_fields($result);
+
+          echo "<h1>Available Genomes</h1>";
+          echo "<table border='1'><tr>";
+
+          for($i=0; $i<$fields_num; $i++)
+           {
+              $field = mysql_fetch_field($result);
+              echo "<td>{$field->name}</td>";
+          }
+          echo "</tr>\n";
+
+          while($row = mysql_fetch_row($result))
+          {
+              echo "<tr>";
+              foreach($row as $cell)
+                  echo "<td>$cell</td>";
+              echo "</tr>\n";
+          }
+          mysql_free_result($result);
+         ?>
+      </p>
     </div>
   </div>
 
