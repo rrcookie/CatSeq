@@ -4,36 +4,37 @@ USE CatSeqDB;
 /* DDL statements below for entity sets: Organism, Taxonomy, Genome,
 (Chromosomal, Mitochondrial commented out until more assemblies have relevent data)
 */
+CREATE TABLE Taxonomy (
+	TaxonID	CHAR(4)	NOT NULL,
+	TaxonGenus CHAR(20) NOT NULL,
+	TaxonFamily CHAR(20) DEFAULT 'Felidae',
+	TaxonOrder CHAR(20) DEFAULT 'Carnivora',
+	TaxonClass CHAR(20) DEFAULT 'Mammalia',
+	PRIMARY KEY (TaxonID),
+	UNIQUE KEY (TaxonGenus)
+);
 
 CREATE TABLE Organism (
-	OrgID		CHAR(4)		NOT NULL,
-	Taxonomy	CHAR(4)		NOT NULL,
-	CommonName	CHAR(20)	NOT NULL,
-	ScientificName	CHAR(20)	NOT NULL,
-	FOREIGN KEY 	(Taxonomy) REFERENCES 	Taxonomy (TaxonID),
-	PRIMARY KEY	(OrgID)
+	OrgID CHAR(4) NOT NULL,
+	Taxonomy CHAR(4) NOT NULL,
+	CommonName CHAR(50) NOT NULL,
+	ScientificName CHAR(100) NOT NULL,
+	FOREIGN KEY  (Taxonomy) REFERENCES Taxonomy (TaxonID),
+	PRIMARY KEY (OrgID)
 );
-CREATE TABLE Taxonomy (
-	TaxonID			CHAR(4)		NOT NULL,
-	TaxonGenus		CHAR(20)	NOT NULL,
-	TaxonFamily		CHAR(20)	DEFAULT 'Felidae',
-	TaxonOrder		CHAR(20)	DEFAULT 'Carnivora',
-	TaxonClass		CHAR(20)	DEFAULT 'Mammalia',
-	PRIMARY KEY	(TaxonID),
-	UNIQUE KEY 	(TaxonGenus)
-);
+
 CREATE TABLE Genome (
-	AssemblyID		CHAR(4)		NOT NULL,
-	FNAFile			CHAR(100)	NOT NULL,
-	GenBankAccession	CHAR(20)	NOT NULL,
-	SpeciesID		CHAR(4)		NOT NULL,
-	AssemblyLevel		CHAR(20)	NOT NULL,
-	GenSize			DOUBLE,
-	ChromCount		INTEGER,
-	FOREIGN KEY	(SpeciesID) REFERENCES	Organism (OrgID),
-	PRIMARY KEY	(AssemblyID),
-	UNIQUE KEY	(GenBankAccession),
-	UNIQUE KEY	(FNAFile)
+	AssemblyID CHAR(4) NOT NULL,
+	FNAFile	 CHAR(100) NOT NULL,
+	GenBankAccession CHAR(20) NOT NULL,
+	SpeciesID CHAR(4) NOT NULL,
+	AssemblyLevel CHAR(20) NOT NULL,
+	GenSize DOUBLE,
+	ChromCount INTEGER,
+	FOREIGN KEY (SpeciesID) REFERENCES Organism (OrgID),
+	PRIMARY KEY (AssemblyID),
+	UNIQUE KEY (GenBankAccession),
+	UNIQUE KEY (FNAFile)
 );
 
 /*
@@ -97,7 +98,7 @@ INSERT INTO Genome(AssemblyID, FNAFile, GenBankAccession, SpeciesID, AssemblyLev
 	('A06', 'GCA_004023925.1_FelNig_v1_BIUU_genomic.fna', 'GCA_004023925.1', 'O02', 'Scaffold', 2428424918),
 	('A07', 'GCA_004023805.1_PanOnc_v1_BIUU_genomic.fna', 'GCA_004023805.1', 'O06', 'Scaffold', 2504534411),
 	('A08', 'GCA_003709585.1_Aci_jub_2_genomic.fna', 'GCA_003709585.1', 'O09', 'Scaffold', 2384834280),
-	('A09', 'GCA_003327715.1_PumCon1.0_genomic.fna', 'GCA_003327715.1', 'O1O', 'Scaffold', 2432966684),
+	('A09', 'GCA_003327715.1_PumCon1.0_genomic.fna', 'GCA_003327715.1', 'O10', 'Scaffold', 2432966684),
 	('A11', 'GCA_001857705.1_PanPar1.0_genomic.fna', 'GCA_001857705.1', 'O08', 'Scaffold', 2578019207),
 	('A12', 'GCA_001443585.1_aciJub1_genomic.fna', 'GCA_001443585.1', 'O09', 'Scaffold', 2372536860),
 	('A13', 'GCA_000464555.1_PanTig1.0_genomic.fna', 'GCA_000464555.1', 'O07', 'Scaffold', 2391082183);
