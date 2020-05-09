@@ -36,32 +36,6 @@ CREATE TABLE Genome (
 	UNIQUE KEY (FNAFile)
 );
 
-/*
-CREATE TABLE Chromosomal (
-	ChromoID	CHAR(4)		NOT NULL,
-	GenomeID	CHAR(4)		NOT NULL,
-	Name		CHAR(20)	NOT NULL,
-	CrSize		INTEGER,
-	GC Content 	INTEGER,
-	Protein 	INTEGER,
-	RNA		INTEGER,
-	Gene		INTEGER,
-	FOREIGN KEY	(GenomeID) REFERENCES Genome (AssemblyID),
-	PRIMARY KEY	(ChromoID)
-);
-CREATE TABLE Mitochondrial (
-	MtID		CHAR(4)		NOT NULL,
-	GenomeID	CHAR(4)		NOT NULL,
-	MtSize		INTEGER,
-	GC Content 	INTEGER,
-	Protein 	INTEGER,
-	RNA		INTEGER,
-	Gene		INTEGER,
-	FOREIGN KEY	(GenomeID) REFERENCES	Genome (AssemblyID),
-	PRIMARY KEY	(MtID)
-);
-*/
-
 /*Populate tables: Taxonomy, Organism, and Genome*/
 INSERT INTO Taxonomy (TaxonID, TaxonGenus) VALUES
 	('T01', 'Felis'),
